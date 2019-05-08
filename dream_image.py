@@ -17,7 +17,6 @@ layer 8: fish begin to appear, frogs/reptilian eyes.
 layer 10: Monkies, lizards, snakes, duck
 """
 LAYER_NUMBER = 3
-DREAM_NAME = 'galaxy'
 NUM_ITERATIONS = 15
 
 X_SIZE = 1920
@@ -41,8 +40,8 @@ created_count = 0
 
 print(f'Total frames: {VIDEO_LENGTH}')
 for i in tqdm(range(0, VIDEO_LENGTH + 1)):
-	if not os.path.isfile('dream/{}/img_{}.jpg'.format(DREAM_NAME, i + 1)):
-		img_result = load_image(filename='dream/{}/img_{}.jpg'.format(DREAM_NAME, i))
+	if not os.path.isfile('dream/img_{}.jpg'.format(i + 1)):
+		img_result = load_image(filename='dream/img_{}.jpg'.format(i))
 
 		# this impacts how quick the "zoom" is
 		img_result = img_result[0 + X_TRIM:Y_SIZE - Y_TRIM, 0 + Y_TRIM:X_SIZE - X_TRIM]
@@ -66,7 +65,7 @@ for i in tqdm(range(0, VIDEO_LENGTH + 1)):
 		img_result = np.clip(img_result, 0.0, 255.0)
 		img_result = img_result.astype(np.uint8)
 		result = PIL.Image.fromarray(img_result, mode='RGB')
-		result.save('dream/{}/img_{}.jpg'.format(DREAM_NAME, i + 1))
+		result.save('dream/img_{}.jpg'.format(i + 1))
 
 		created_count += 1
 		if created_count > BATCH_SIZE:

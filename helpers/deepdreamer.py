@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
 import random
@@ -28,17 +27,6 @@ def save_image(image, filename):
         PIL.Image.fromarray(image).save(file, 'jpeg')
 
 
-def plot_image(image):
-    # Ensure the pixel-values are between 0 and 255.
-    image = np.clip(image, 0.0, 255.0)
-    # Convert pixels to bytes.
-    image = image.astype(np.uint8)
-
-    # Convert to a PIL-image and display it.
-    plt.imshow(image, interpolation='lanczos')
-    plt.show()
-
-
 def normalize_image(x):
     # Get the min and max values for all pixels in the input.
     x_min = x.min()
@@ -47,14 +35,6 @@ def normalize_image(x):
     # Normalize so all values are between 0.0 and 1.0
     x_norm = (x - x_min) / (x_max - x_min)
     return x_norm
-
-
-def plot_gradient(gradient):
-    # Normalize the gradient so it is between 0.0 and 1.0
-    gradient_normalized = normalize_image(gradient)
-    # Plot the normalized gradient.
-    plt.imshow(gradient_normalized, interpolation='bilinear')
-    plt.show()
 
 
 def resize_image(image, size=None, factor=None):
@@ -170,8 +150,7 @@ def tiled_gradient(gradient, image, tile_size=400):
 
 
 def optimize_image(layer_tensor, image,
-                   num_iterations=10, step_size=3.0, tile_size=400,
-                   show_gradient=False):
+                   num_iterations=10, step_size=3.0, tile_size=400):
     """
     Use gradient ascent to optimize an image so it maximizes the
     mean value of the given layer_tensor.
@@ -225,13 +204,6 @@ def optimize_image(layer_tensor, image,
         # Update the image by following the gradient.
         img += grad * step_size_scaled
 
-        if show_gradient:
-            # Print statistics for the gradient.
-            msg = "Gradient min: {0:>9.6f}, max: {1:>9.6f}, stepsize: {2:>9.2f}"
-            print(msg.format(grad.min(), grad.max(), step_size_scaled))
-
-            # Plot the gradient.
-            plot_gradient(grad)
     return img
 
 

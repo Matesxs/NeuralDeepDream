@@ -58,7 +58,7 @@ for i in tqdm(range(0, VIDEO_LENGTH + 1)):
 		                                image=img_result,
 		                                num_iterations=NUM_ITERATIONS,
 		                                step_size=1.0,
-		                                rescale_factor=0.7,
+		                                rescale_factor=0.71,
 		                                num_repeats=1,
 		                                blend=0.2)
 

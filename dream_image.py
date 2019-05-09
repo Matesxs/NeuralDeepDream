@@ -25,6 +25,9 @@ Y_SIZE = 1080
 X_TRIM = 2
 Y_TRIM = 1
 
+BRIGHT_MIN = 70
+BRIGHT_MAX = 90
+
 FRAMES_PER_SEC = 30
 
 # Constants / dont change
@@ -66,7 +69,7 @@ for i in tqdm(range(0, VIDEO_LENGTH + 1)):
 		img_result = img_result[0 + X_TRIM:Y_SIZE - Y_TRIM, 0 + Y_TRIM:X_SIZE - X_TRIM]
 		br = brightness('dream/img_{}.jpg'.format(i))
 
-		if 90 < br < 70:
+		if BRIGHT_MAX < br < BRIGHT_MIN:
 			# Image is too dark
 			img_result[:, :, 0] += random.choice([2, 3, 4])  # reds
 			img_result[:, :, 1] += random.choice([3, 4])  # greens

@@ -18,7 +18,7 @@ layer 8: fish begin to appear, frogs/reptilian eyes.
 layer 10: Monkies, lizards, snakes, duck
 """
 LAYER_NUMBER = 3
-NUM_ITERATIONS = 15
+NUM_ITERATIONS = 17
 
 X_SIZE = 1920
 Y_SIZE = 1080
@@ -49,6 +49,18 @@ print(f'Total frames: {VIDEO_LENGTH}')
 for i in tqdm(range(0, VIDEO_LENGTH + 1)):
 	if not os.path.isfile('dream/img_{}.jpg'.format(i + 1)):
 		img_result = load_image(filename='dream/img_{}.jpg'.format(i))
+
+		if random.randint(0, 500) == 1:
+			choice = random.choice([1, 2, 3, 4, 6, 7, 8, 10])
+			TENSOR_LAYERS = model.layer_tensors[choice]
+			if choice < 4:
+				NUM_ITERATIONS = 17
+			elif choice < 7:
+				NUM_ITERATIONS = 22
+			elif choice == 8:
+				NUM_ITERATIONS = 26
+			else:
+				NUM_ITERATIONS = 30
 
 		# this impacts how quick the "zoom" is
 		img_result = img_result[0 + X_TRIM:Y_SIZE - Y_TRIM, 0 + Y_TRIM:X_SIZE - X_TRIM]
